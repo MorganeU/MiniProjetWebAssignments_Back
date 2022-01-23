@@ -7,11 +7,15 @@ let AssignmentSchema = Schema({
     id: Number,
     dateDeRendu: Date,
     nom: String,
-    rendu: Boolean
+    rendu: Boolean,
+    matiere: String,
+    auteur: String,
+    note: Number,
+    remarques: String
 });
 
 AssignmentSchema.plugin(aggregatePaginate);
- ""
+""
 // C'est à travers ce modèle Mongoose qu'on pourra faire le CRUD
 // le premier paramètre est la "collection" mongoDB
 // ATTENTION, y'a du matching entre la chaine passée
