@@ -86,8 +86,6 @@ function updateAssignment(req, res) {
         } else {
             res.json({ message: 'updated' })
         }
-
-        // console.log('updated ', assignment)
     });
 
 }
