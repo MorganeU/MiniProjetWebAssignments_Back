@@ -1,4 +1,5 @@
 let Assignment = require('../model/assignment');
+/* let User = require('../model/users') */
 
 
 // Récupérer tous les assignments (GET)
@@ -55,6 +56,24 @@ function postAssignment(req, res) {
         res.json({ message: `${assignment.nom} saved!` })
     })
 }
+
+/* // Ajout d'un user (POST)
+function postUser(req, res) {
+    let user = new User();
+    user.username = req.body.username;
+    user.password = req.body.password;
+
+    console.log("POST user reçu :");
+    console.log(user)
+
+    user.save((err) => {
+        if (err) {
+            res.send('cant post a user ', err);
+        }
+        res.json({ message: `${user.username} saved!` })
+    })
+} */
+
 
 // Update d'un assignment (PUT)
 function updateAssignment(req, res) {
