@@ -25,3 +25,6 @@ Eleves :
 - id : Mark - mdp : mark
 - id : Christine - mdp : christine
 - id : Paul - mdp : paul
+
+## Contributions
+Travail en binôme - appels pour travailler ensemble - répartition des tâches en fonction des capacités de chacun
