@@ -28,4 +28,5 @@ Eleves :
 
 ## Contributions
 Morgane ULVE et Najib BEY OSMAN
+
 Travail en binôme - appels pour travailler ensemble - répartition des tâches en fonction des capacités de chacun
