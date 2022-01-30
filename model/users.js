@@ -8,6 +8,7 @@ let UserSchema = Schema({
     password: {type: String, required: true},
     role: {type: String, required:true},
     matiere: {type: String},
+    photo: {type: String}
 });
 
 module.exports = mongoose.model('users', UserSchema);

@@ -35,7 +35,10 @@ function getAssignment(req, res) {
 
     Assignment.findOne({ id: assignmentId }, (err, assignment) => {
         if (err) { res.send(err) }
-        res.json(assignment);
+        users.findOne({ matiere: assignment.matiere }, (err, prof) => {
+            if (err) { res.send(err) }
+            res.json({assignment, prof});
+        })
     })
 }
 
@@ -89,7 +92,6 @@ function updateAssignment(req, res) {
 
 // suppression d'un assignment (DELETE)
 function deleteAssignment(req, res) {
-
     Assignment.findByIdAndRemove(req.params.id, (err, assignment) => {
         if (err) {
             res.send(err);
