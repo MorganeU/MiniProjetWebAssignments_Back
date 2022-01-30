@@ -10,4 +10,23 @@ async function login(req, res){
     else res.json({user: result})
 }
 
-module.exports = { login }
+async function signin(req, res) {
+
+    const { identifiant, typeUser, imageUser, mdpUser, matiere, imageMatiere } = req.body
+    
+    try {
+        const user = await UserSchema.create({
+            username: identifiant,
+            password: mdpUser,
+            role: typeUser,
+            matiere: matiere,
+            photo: imageUser,
+            photoMatiere: imageMatiere
+        })
+        res.json({user})
+    } catch (error) {
+        console.log(error)
+        res.json({err: `${Object.keys(error.keyValue)[0]} ${Object.values(error.keyValue)[0]} existe déjà`})
+    }
+}
+module.exports = { login, signin }
