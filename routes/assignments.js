@@ -1,4 +1,5 @@
 let Assignment = require('../model/assignment');
+const users = require('../model/users');
 /* let User = require('../model/users') */
 
 
@@ -38,23 +39,19 @@ function getAssignment(req, res) {
     })
 }
 
-// Ajout d'un assignment (POST)
+// Ajout d'un assignment pour chaque élève (POST)
 function postAssignment(req, res) {
-    let assignment = new Assignment();
-    assignment.id = req.body.id;
-    assignment.nom = req.body.nom;
-    assignment.dateDeRendu = req.body.dateDeRendu;
-    assignment.rendu = req.body.rendu;
 
-    console.log("POST assignment reçu :");
-    console.log(assignment)
-
-    assignment.save((err) => {
-        if (err) {
-            res.send('cant post assignment ', err);
+    users.find({ role: 'Eleve' }, async (err, users) => {
+        for(const user of users) {
+            const userAssignment = new Assignment(req.body);
+            userAssignment.auteur = user.username
+            userAssignment.id = Math.round(Math.random() * 1000000)+1030;
+            console.log(userAssignment)
+            await userAssignment.save()
         }
-        res.json({ message: `${assignment.nom} saved!` })
     })
+    res.json(res.json({ message: `${assignment.nom} saved!` }))
 }
 
 /* // Ajout d'un user (POST)
