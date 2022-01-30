@@ -4,7 +4,7 @@ const users = require('../model/users');
 
 
 // Récupérer tous les assignments (GET)
-function getAssignments(req, res) {
+async function getAssignments(req, res) {
     let filters = {}
     if (req.query.filterRendu) {
         filters.rendu = (req.query.filterRendu === 'true') ? true : false
@@ -18,6 +18,10 @@ function getAssignments(req, res) {
     }
     if (req.query.dateSort) options.sort = { dateDeRendu: req.query.dateSort }
 
+    const user = await users.findById(req.query.userId)
+    if(user.role === 'Eleve') filters.auteur = user.username
+    else filters.matiere = user.matiere
+    
     var aggregateQuery = Assignment.aggregate().match(filters);
     Assignment.aggregatePaginate(aggregateQuery, options,
         (err, assignments) => {
@@ -50,11 +54,10 @@ function postAssignment(req, res) {
             const userAssignment = new Assignment(req.body);
             userAssignment.auteur = user.username
             userAssignment.id = Math.round(Math.random() * 1000000)+1030;
-            console.log(userAssignment)
             await userAssignment.save()
         }
     })
-    res.json(res.json({ message: `${assignment.nom} saved!` }))
+    res.json(res.json({ message: `${req.body.nom} saved!` }))
 }
 
 /* // Ajout d'un user (POST)
